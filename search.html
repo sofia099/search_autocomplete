@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiteraLookup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>LiteraLookup</h1>
+    <div class="subheading">
+        We literally lookup the literary source you are searching for
+    </div>
+    
+    <div class="tab-buttons" id="tab-buttons">
+        <button class="tab-button" data-tab="search-title-tab">Search by Title</button>
+        <button class="tab-button" data-tab="search-keywords-tab">Search by Keywords</button>
+        <button class="tab-button" data-tab="search-semantic-tab">Search by Semantic</button>
+    </div>
+
+    <div id="search-title-tab" class="tab-content active-tab">
+        <div class="search-container">
+            <input type="text" class="search-bar" id="title-search-bar" data-type="title" placeholder="Type title to search...">
+            <button class="search-button" data-type="title">Search</button>
+            <div class="autocomplete-results" id="autocomplete-results"></div>
+        </div>
+    </div>
+
+    <div id="search-keywords-tab" class="tab-content">
+        <div class="search-container">
+            <input type="text" class="search-bar" id="keywords-search-bar" data-type="keywords" placeholder="Type keywords to search...">
+            <button class="search-button" data-type="keywords">Search</button>
+        </div>
+    </div>
+
+    <div id="search-semantic-tab" class="tab-content">
+        <div class="search-container">
+            <input type="text" class="search-bar" id="semantic-search-bar" data-type="semantic" placeholder="Type description to search...">
+            <button class="search-button" data-type="semantic">Search</button>
+        </div>
+    </div>
+
+    <div class="search-results" id="search-results">
+        <table id="results-table"></table>
+    </div>
+
+    <div id="error-box" class="error-box" style="display: none;">
+        <strong>Error:</strong> <span id="error-text-box"></span>
+    </div>
+
+    <script defer src="script.js"></script>
+</body>
+
+</html>

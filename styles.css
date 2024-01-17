@@ -1,0 +1,132 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
+    height: 100vh;
+    margin: 0;
+    margin-top: 50px;
+}
+
+.subheading {
+    font-size: small; 
+    font-style: italic; 
+    margin-bottom: 20px;
+}
+
+.tab-buttons {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: purple;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.tab-content {
+    display: none;
+}
+
+.active-tab {
+    display: block;
+}
+
+.search-container {
+    margin-top: 10px;
+    display: flex;
+    align-items: top;
+    position: relative;
+}
+
+.search-bar {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.search-button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: purple;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.autocomplete-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.autocomplete-results ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.autocomplete-results li {
+    margin-bottom: 5px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.autocomplete-results li:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-results li:hover {
+    background-color: #f0f0f0;
+}
+
+.search-results {
+    margin-top: 20px;
+    width: 80%;
+    overflow-x: auto;
+}
+
+.search-results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.search-results th,
+.search-results td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.search-results th {
+    background-color: purple;
+    color: white;
+}
+
+.error-box {
+    background-color: #ff9999;
+    color: #990000;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
