@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const rocksetApiKey = "S4ClvkXux553Yux77zWg7F5hdUY0DihSHbC8JbSBETeeTFfC3n6y3JeTLjsFwDM4";
-    const apiServer = "https://api.usw2a1.rockset.com";
-    const qlWorkspace = 'Text-Search';
-    const virtualInstanceId = 'rrn:vi:usw2a1:dcd80678-c9f0-41a8-9dcc-d4e9a0b21fd2';
-    const openaiApiKey = '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';
+    const rocksetApiKey = "YOUR_ROCKSET_API_KEY";
+    const apiServer = "YOUR_ROCKSET_REGION";
+    const qlWorkspace = 'YOUR_QL_WORKSPACE';
+    const virtualInstanceId = 'YOUR_VI_RRN';
+    const openaiApiKey = 'YOUR_OPENAI_API_KEY';
 
     async function queryRockset(type, searchQuery) {
         let qlName, parameters;
