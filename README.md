@@ -214,8 +214,8 @@ Create an API key in the [API Keys tab of the Rockset Console](https://console.r
 
 <br /><br />
 
-## Step 5: Update `search.html`
-Before running the .html file, check lines 2-5:
+## Step 5: Update `script.js`
+Before running the webpage, check lines 2-8:
 ```
 const rocksetApiKey = "YOUR_ROCKSET_API_KEY"; // UPDATE WITH YOUR ROCKSET API KEY
 const apiServer = "YOUR_ROCKSET_REGION_URL" // UPDATE WITH YOUR ROCKSET REGION URL (ex: "https://api.usw2a1.rockset.com")
