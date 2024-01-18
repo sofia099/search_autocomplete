@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (type === 'semantic') {
             const searchEmbedding = await embedWithOpenAI(searchQuery);
             qlName = qlName_semantic;
-            parameters = [{ name: 'search_embedding', type: 'string', value: `[${searchEmbedding}]` }];
+            parameters = [{ name: 'search_query', type: 'string', value: `[${searchEmbedding}]` }];
         }
 
         try {
