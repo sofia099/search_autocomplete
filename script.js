@@ -1,19 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const rocksetApiKey = "YOUR_ROCKSET_API_KEY";
-    const apiServer = "YOUR_ROCKSET_REGION";
-    const qlWorkspace = 'YOUR_QL_WORKSPACE';
-    const virtualInstanceId = 'YOUR_VI_RRN';
-    const openaiApiKey = 'YOUR_OPENAI_API_KEY';
+    const rocksetApiKey = "YOUR_ROCKSET_API_KEY"; // UPDATE WITH YOUR ROCKSET API KEY
+    const apiServer = "YOUR_ROCKSET_REGION_URL" // UPDATE WITH YOUR ROCKSET REGION URL (ex: "https://api.usw2a1.rockset.com")
+    const qlWorkspace = 'Text-Search'; // UPDATE if not the same
+    const qlName_titles = 'searchTitles'; // UPDATE if not the same
+    const qlName_keywords = 'searchKeywords'; // UPDATE if not the same
+    const qlName_semantic = 'searchSemantic'; // UPDATE if not the same
+    const openaiApiKey = "YOUR_OPENAI_API_KEY"; // UPDATE WITH YOUR OPENAI API KEY (only for semantic search)
 
     async function queryRockset(type, searchQuery) {
         let qlName, parameters;
 
         if (type === 'title' || type === 'keywords') {
-            qlName = type === 'title' ? 'searchTitles' : 'searchKeywords';
+            qlName = type === 'title' ? qlName_titles : qlName_keywords;
             parameters = [{ name: 'search_query', type: 'string', value: searchQuery }];
         } else if (type === 'semantic') {
             const searchEmbedding = await embedWithOpenAI(searchQuery);
-            qlName = 'searchSemantic';
+            qlName = qlName_semantic;
             parameters = [{ name: 'search_embedding', type: 'string', value: `[${searchEmbedding}]` }];
         }
 
@@ -25,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    'virtual_instance_id': virtualInstanceId,
                     'parameters': parameters
                 })
             });
