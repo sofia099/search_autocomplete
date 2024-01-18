@@ -14,6 +14,8 @@ Check out [these slides](https://docs.google.com/presentation/d/11Cgn4iCBeleePXs
 
 To build the autocomplete & text search on titles & keywords, you will need an account with Rockset. To build the semantic search (optional), you will need an account on both OpenAI and Rockset to get an API key for both platforms. Thankfully, API keys are available on the free versions of both platforms. To create an account on OpenAI go [here](https://platform.openai.com/signup?) and to create an account on Rockset go [here](https://rockset.com/create/).
 
+<br /><br />
+
 ## Step 1: Setup Collection in Rockset
 Rockset already has a public dataset of book titles, descriptions, _and embeddings_! Follow the steps below to set-up this collection correctly:
   1. In the Rockset Console, go to the "Collections" tab and then select "Create a Collection"
@@ -61,6 +63,8 @@ where
   6. In the next page, type a workspace name and collection name. I used workspace=`Text-Search` and collection=`Books`.
   8. Final step is to click "Create" and wait for the data to ingest into your Rockset collection. This will only take a few minutes.<br /><br />
 
+<br /><br />
+
 ## Step 2 (only for Semantic Search): Build an IVF Index
 In order to run semantic search on the embeddedings in the public dataset, we will need to build a special IVF Index. This can be done with the following query:
 
@@ -74,12 +78,17 @@ ON
 Run the query below to check the status of the index. Proceed when the status is `Ready`.
 
 ```
-SELECT status
-FROM _system.similarity_index
-WHERE collection_name = 'Books'
+SELECT
+    index_status, *
+FROM
+    _system.similarity_index
+WHERE
+    name = 'text_search_book_embed'
 ```
 
 For more information, check out [Rockset's Vector Search documentation](https://docs.rockset.com/documentation/docs/running-vector-search-with-rockset#rocksets-vector-search-indexing).
+
+<br /><br />
 
 ## Step 3: Create 3 Query Lambdas
 Rockset's patented [Query Lambdas](https://docs.rockset.com/documentation/docs/query-lambdas) are named, parameterized SQL queries stored in Rockset that can be executed from a dedicated REST endpoint. In the Query Editor in Rockset, save the following SQL queries as a Query Lambdas. We will later call these in our webpage. Each Query Lambda below will require you to create a parameter `search_query` of type `string`.
@@ -197,22 +206,24 @@ ORDER BY
 LIMIT
     10
 ```
+<br /><br />
 
 ## Step 4: Create an API Key & Grab your Region
 Create an API key in the [API Keys tab of the Rockset Console](https://console.rockset.com/apikeys). The region can be found in the dropdown menu at the top of the page. For more information, refer to [Rockset's API Reference](https://docs.rockset.com/documentation/reference/rest-api).<br /><br />
 
+<br /><br />
+
 ## Step 5: Update `search.html`
-Before running the .html file, check the following lines & update as needed:
-- line 89: `center: [37.7749, -122.4194]`<br />
-  These are coordinates to San Francisco. Update if using another location dataset
-- line 281: `const apiKey = "YOUR_ROCKSET_API_KEY";`<br />
-  Update with your Rockset API Key from Step 4.
-- line 282: `const apiServer = "YOUR_ROCKSET_REGION_URL"`<br />
-  Update with your Rockset Region URL (ex: "https://api.usw2a1.rockset.com")
-- line 283: `const qlWorkspace = 'airbnb'`<br />
-  If you saved the Query Lambda from Step 3 in a different workspace, update here.
-- line 284: `const qlName = 'airbnbSearch'`<br />
-  If you saved the Query Lambda from Step 3 under a different name, update here.
+Before running the .html file, check lines 2-5:
+```
+const rocksetApiKey = "YOUR_ROCKSET_API_KEY"; // UPDATE WITH YOUR ROCKSET API KEY
+const apiServer = "YOUR_ROCKSET_REGION_URL" // UPDATE WITH YOUR ROCKSET REGION URL (ex: "https://api.usw2a1.rockset.com")
+const qlWorkspace = 'Text-Search'; // UPDATE if not the same
+const qlName_titles = 'searchTitles'; // UPDATE if not the same
+const qlName_keywords = 'searchKeywords'; // UPDATE if not the same
+const qlName_semantic = 'searchSemantic'; // UPDATE if not the same
+const openaiApiKey = "YOUR_OPENAI_API_KEY"; // UPDATE WITH YOUR OPENAI API KEY (only for semantic search)
+```
 <br /><br />
 
 ## Step 6: Run the .html file and start searching!
